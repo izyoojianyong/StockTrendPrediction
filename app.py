@@ -40,6 +40,24 @@ import plotly.express as px
 
 # Get New stock data
 def getNewData(stock_name):
+    # 'NASDAQ'
+    # 'NYSE'
+    # 'AMEX'
+    # 'OTC'
+    # 'EURONEXT'
+    # 'TSX'
+    # 'ASX'
+    # 'LSE'
+    # 'HKEX'
+    # 'SSE'
+    # 'SZSE'
+    # 'TSE'
+    # 'BSE'
+    # 'NSE'
+    # 'KOSPI'
+    # 'TADAWUL'
+    # 'BMV'
+    # 'MYX'
     tv = TvDatafeed()
     data = tv.get_hist(symbol=stock_name.upper(), exchange='MYX', interval=Interval.in_daily, n_bars=2000)
     if data is not None:
@@ -619,8 +637,8 @@ def gru_future_prediction(stock_name, data, look_back, predict_days):
     while i < predict_days:
         if i == 0:               
             x_input = data[len(data)-look_back:]
-            # model = tf.keras.models.load_model("stockpredictmodel/gru_trainned_" + stock_name + ".h5")
-            model = keras.layers.TFSMLayer("stockpredictmodel/" + stock_name + ".h5")
+            model = tf.keras.models.load_model("stockpredictmodel/gru_trainned_" + stock_name + ".h5")
+            # model = keras.layers.TFSMLayer("stockpredictmodel/" + stock_name + ".h5")
             future = model.predict(x_input) 
             future = scaler.inverse_transform(future)
             next_close = future[0,0]
@@ -638,8 +656,8 @@ def gru_future_prediction(stock_name, data, look_back, predict_days):
             data = gru_indicators(stock)  
             data = gru_process_data(data, look_back)   
             x_input = data[len(data)-look_back:]
-            # model = tf.keras.models.load_model("stockpredictmodel/gru_trainned_" + stock_name + ".h5")
-            model = keras.layers.TFSMLayer("stockpredictmodel/" + stock_name + ".h5")
+            model = tf.keras.models.load_model("stockpredictmodel/gru_trainned_" + stock_name + ".h5")
+            # model = keras.layers.TFSMLayer("stockpredictmodel/" + stock_name + ".h5")
             future = model.predict(x_input) 
             future = scaler.inverse_transform(future)
             next_close = future[0,0]
